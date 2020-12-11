@@ -5,7 +5,7 @@ import axios from "axios";
 const URL = "https://fir-dynamiclinks-e43dd.web.app/practical-api.json";
 
 const List = () => {
-  const [services, setPurchasedServices] = useState({});
+  const [services, setPurchasedServices] = useState([]);
   const fetchDetails = async () => {
     // destructuring data directorly so we dont have to use response every time
     const { data } = await axios.get(URL);
@@ -13,14 +13,14 @@ const List = () => {
 
     // updating state
     let details = data.data.purchased_services; // TODO: fix bug here 
-    setPurchasedServices(details);
+    setPurchasedServices([...services,details]);
 
     console.log(services); // TODO: NOW I CAN FETCH API AND LOG IT IN CONSOLE
   };
 
   useEffect( () => {
      fetchDetails();
-  },[services]);
+  },[]);
 
   return (
     <Container>
